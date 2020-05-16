@@ -4,7 +4,7 @@ var appRouter = function (app) {
         person.fields["id"]=person.pk
         return person.fields;
       });
-      res.status(200).send(people);
+      res.status(200).send({"results":people});
     });
   }
   
