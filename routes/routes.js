@@ -1,6 +1,10 @@
 var appRouter = function (app) {
-    app.get("/", function(req, res) {
-      res.status(200).send("First Version of SWAPI API");
+    app.get("/people", function(req, res) {
+      var people = require('../fixtures/people.json').map((person)=>{
+        person.fields["id"]=person.pk
+        return person.fields;
+      });
+      res.status(200).send(people);
     });
   }
   
