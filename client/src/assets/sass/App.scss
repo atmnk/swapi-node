@@ -1,0 +1,136 @@
+@import '~bootstrap/scss/bootstrap.scss';
+// @import 'components/nav_bar.scss';
+// @import 'components/login_page.scss';
+// @import 'components/video_details_page.scss';
+// @import 'components/account_page.scss';
+// @import 'components/color_helpers.scss';
+// @import 'components/content.scss';
+// @import 'components/my_journey.scss';
+// @import 'components/reset_password.scss';
+// @import 'components/video_player.scss';
+// @import 'components/footer.scss';
+// @import 'components/instructor_details_page.scss';
+
+
+.min-height{
+  min-height: calc(54vh - 70px);
+}
+
+.custom-control {
+    padding-left: 0;
+}
+
+.custom-switch {
+    padding-left: 0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.pageLoading {
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  position: fixed;
+  background: rgba(162, 140, 124, 0.23);
+  z-index: 4999;
+  display: none;
+}
+
+.heading-1 {
+  font: 30px/36px SF Pro Display Medium;
+  color: #333333;
+}
+
+.heading-2 {
+  font: 24px/29px SF Pro Display Medium;
+  color: #333333;
+}
+
+.heading-3 {
+  font: 20px/24px SF Pro Display Medium;
+  color: #333333;
+}
+
+.heading-4 {
+  font: 18px/24px SF Pro Display;
+  color: #505050;
+}
+
+@media screen and (max-width: 1024px) {
+  .heading-1 {
+    font: 26px/32px SF Pro Display Medium;
+    color: #333333;
+  }
+  
+  .heading-2 {
+    font: 20px/25px SF Pro Display Medium;
+    color: #333333;
+  }
+  
+  .heading-3 {
+    font: 18px/22px SF Pro Display Medium;
+    color: #333333;
+  }
+  
+  .heading-4 {
+    font: 16px/24px SF Pro Display;
+    color: #505050;
+  }
+}
+.heading-5{
+  font: 16px/22px SF Pro Display;
+}
+
+@media screen and (max-width: 768px) {
+  .heading-1 {
+    font: 24px/30px SF Pro Display Medium;
+    color: #333333;
+  }
+  
+  .heading-2 {
+    font: 18px/23px SF Pro Display Medium;
+    color: #333333;
+  }
+  
+  .heading-3 {
+    font: 16px/18px SF Pro Display Medium;
+    color: #333333;
+  }
+  
+  .heading-4 {
+    font: 14px/18px SF Pro Display;
+    color: #505050;
+  }
+
+  .heading-5 {
+    font: 14px/18px SF Pro Display;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .heading-1 {
+    font: 24px/30px SF Pro Display Medium;
+    color: #333333;
+  }
+  
+  .heading-2 {
+    font: 18px/23px SF Pro Display Medium;
+    color: #333333;
+  }
+  
+  .heading-3 {
+    font: 16px/18px SF Pro Display Medium;
+    color: #333333;
+  }
+  
+  .heading-4 {
+    font: 16px/18px SF Pro Display;
+    color: #505050;
+  }
+
+  .heading-5 {
+    font: 14px/18px SF Pro Display;
+  }
+}

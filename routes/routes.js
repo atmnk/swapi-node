@@ -1,5 +1,5 @@
 var appRouter = function (app) {
-    app.get("/people", function(req, res) {
+    app.get("/api/people", function(req, res) {
       var people = require('../fixtures/people.json').map((person)=>{
         person.fields["id"]=person.pk
         return person.fields;
