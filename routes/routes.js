@@ -38,7 +38,7 @@ var appRouter = function (app) {
           });
       } else {
         res
-        .status(401)
+        .status(404)
         .json({
           error: 'BAD_CREDENTIALS'
         });

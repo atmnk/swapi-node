@@ -21,7 +21,7 @@ export default class LoginPage extends React.Component {
             password: '',
             errors: null
         };
-        _.bindAll(this, 'submit', 'resetPassword', 'changeState', 'onSuccess','updateText', 'handleChange', 'renderError', 'navigateTo');
+        _.bindAll(this, 'submit', 'changeState', 'onSuccess','updateText', 'handleChange', 'renderError', 'navigateTo');
     }
 
     componentDidMount() {
@@ -45,8 +45,6 @@ export default class LoginPage extends React.Component {
             email: data.email
         };
         window.storeToken(data.token);
-        // window.setRefreshToken(data.refreshToken);
-        // window.setTokenExpiry(data.tokenExpiresAt);
         window.renderNavBar();
         this.navigateTo(Url.PERSONS_PAGE);
     }
@@ -68,13 +66,15 @@ export default class LoginPage extends React.Component {
             .catch(error => this.onFail(error));
     }
 
-    submit = () => { this.login(); };
+    submit = (event) => { 
+        event.preventDefault();
+        event.stopPropagation();
+        this.login(); 
+        
+    };
 
     onEnter = (e) => { if (e.keyCode === 13) { this.login(); } };
 
-    resetPassword() {
-        this.navigateTo(Url.RESET_PASSWORD);
-    }
 
     renderError(className = 'text-danger') {
         const containsError = this.state.errors && this.state.errors !== undefined;
@@ -125,7 +125,7 @@ export default class LoginPage extends React.Component {
                                         <Form.Group controlId="password">
                                             <Form.Control onKeyDown={this.onEnter} type="password" name='password' placeholder="Password" value={this.state.password} onChange={this.changeState} />
                                         </Form.Group>
-                                        <Button variant="primary" type="button" onClick={this.submit} id="loginButton">
+                                        <Button variant="primary" onClick={this.submit} id="loginButton">
                                             LOGIN
                                         </Button>
                                     </Form>
