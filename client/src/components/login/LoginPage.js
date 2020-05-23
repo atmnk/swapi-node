@@ -125,7 +125,7 @@ export default class LoginPage extends React.Component {
                                         <Form.Group controlId="password">
                                             <Form.Control onKeyDown={this.onEnter} type="password" name='password' placeholder="Password" value={this.state.password} onChange={this.changeState} />
                                         </Form.Group>
-                                        <Button variant="primary" type="button" onClick={this.submit} controlId="loginButton">
+                                        <Button variant="primary" type="button" onClick={this.submit} id="loginButton">
                                             LOGIN
                                         </Button>
                                     </Form>
