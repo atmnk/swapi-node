@@ -1,7 +1,7 @@
 import React from "react";
 import _ from 'underscore';
 import User from "../../api/user";
-
+import messages from "../../assets/messages/errors.json";
 import {
     Form,
     Button,
@@ -21,14 +21,13 @@ export default class LoginPage extends React.Component {
             password: '',
             errors: null
         };
-        _.bindAll(this, 'submit', 'resetPassword', 'changeState', 'onSuccess');
-        // _.bindAll(this, 'submit','updateText', 'handleChange', 'renderError', 'navigateTo');
+        _.bindAll(this, 'submit', 'resetPassword', 'changeState', 'onSuccess','updateText', 'handleChange', 'renderError', 'navigateTo');
     }
 
     componentDidMount() {
-        // if (window.getJwtToken()) {
-        //     this.navigateTo(Url.CONTENT);
-        // }
+        if (window.getJwtToken()) {
+            this.navigateTo(Url.PERSONS_PAGE);
+        }
     }
 
     changeState(event) {
@@ -45,12 +44,11 @@ export default class LoginPage extends React.Component {
             lastName: data.lastName,
             email: data.email
         };
-        window.storeToken(data.idToken);
-        window.setRefreshToken(data.refreshToken);
-        window.setTokenExpiry(data.tokenExpiresAt);
-        window.userInit(user);
+        window.storeToken(data.token);
+        // window.setRefreshToken(data.refreshToken);
+        // window.setTokenExpiry(data.tokenExpiresAt);
         window.renderNavBar();
-        this.navigateTo(Url.CONTENT);
+        this.navigateTo(Url.PERSONS_PAGE);
     }
 
     onFail(error) {
@@ -61,7 +59,7 @@ export default class LoginPage extends React.Component {
 
     login() {
         const loginData = {
-            username: this.state.email,
+            username: this.state.username,
             password: this.state.password
         };
         let user = new User();
@@ -78,9 +76,33 @@ export default class LoginPage extends React.Component {
         this.navigateTo(Url.RESET_PASSWORD);
     }
 
+    renderError(key, className = 'text-danger') {
+        const containsError = this.state.errors && this.state.errors !== undefined;
+        if (containsError) {
+            const errorMessage = this.state.errors;
+            return <span className={className}>{messages[errorMessage] ? messages[errorMessage] : errorMessage}</span>;
+        }
+    }
+
+    updateText(event) {
+        const attributeName = event.target.name;
+        const attributeValue = event.target.value;
+
+        this.state.model.set(attributeName, attributeValue);
+        this.setState({ model: this.state.model });
+    }
+
+    handleChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    navigateTo(url, state = {}) {
+        this.props.history.push(url, state);
+    }
+
     render() {
         return (
-            <div className="login-page my-n5">
+            <div>
                 <div className="container">
                     <Row>
                         <Col xl={{ offset: 7, span: 5 }} sm={{ span: 8, offset: 2 }} md={{ offset: 3, span: 6 }}>
@@ -92,8 +114,7 @@ export default class LoginPage extends React.Component {
                                             &nbsp;Sign up now</Card.Link>
                                     </Card.Subtitle>
                                     <label className="login-error">
-                                        Some Error
-                                    {/* {this.renderError('message')} */}
+                                    {this.renderError('message')}
                                     </label>
                                     
                                     

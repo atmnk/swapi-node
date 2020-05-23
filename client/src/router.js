@@ -10,7 +10,7 @@ const Router = () => (
         <Switch>
             
             {/* PrivateRoute     */}
-            <Route exact path={Url.PERSONS_PAGE} component={PersonsPage} />        
+            <PrivateRoute exact path={Url.PERSONS_PAGE} component={PersonsPage} />        
 
             {/* Route */}
 
@@ -29,18 +29,18 @@ const defaultRedirection = (props) => {
     );
 };
 
-// const PrivateRoute = ({ component: Component, ...rest }) => (
-//     <Route
-//         {...rest}
-//         render={props => (
-//             (!window.getJwtToken() || window.getJwtToken() === null) ? defaultRedirection(props) : (
-//                 <div>
-//                     {window.renderNavBar()}
-//                     <Component {...props} />
-//                 </div>
-//             )
-//         )}
-//     />
-// );
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+        {...rest}
+        render={props => (
+            (!window.getJwtToken() || window.getJwtToken() === null) ? defaultRedirection(props) : (
+                <div>
+                    {window.renderNavBar()}
+                    <Component {...props} />
+                </div>
+            )
+        )}
+    />
+);
 
 export default Router;

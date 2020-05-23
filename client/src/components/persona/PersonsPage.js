@@ -1,7 +1,8 @@
 import React from "react";
-import _ from 'underscore';
 import User from "../../api/user";
-
+import Persona from "../../api/persona"
+import PersonaList from "./PersonaList"
+import _, {isEmpty} from "underscore";
 import {
     Form,
     Button,
@@ -16,16 +17,29 @@ export default class PersonsPage extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            personas:[],
+        };
+        _.bindAll(this, 'fetchPersonas')
+    }
+    fetchPersonas = () => {
+        let persona = new Persona();
+        persona.get_all()
+            .then((response) => {
+                this.setState({ personas: response.data.results})
+            });
     }
 
     componentDidMount() {
-        
+        this.fetchPersonas();
     }
-
-    
     render() {
         return (
-            <div>List of all Persons</div>
+            <div>
+                <div>List of all Persons</div>
+                <PersonaList personas={this.state.personas}/>
+            </div>
+            
         );
     }
 

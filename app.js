@@ -17,7 +17,7 @@ app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 var server = app.listen(PORT, err => {
     console.log("app running on port.", server.address().port);
 });
