@@ -2,6 +2,7 @@ import React from "react";
 import _ from 'underscore';
 import User from "../../api/user";
 import messages from "../../assets/messages/errors.json";
+import {getJwtToken,storeToken} from '../../utils/cache'
 import {
     Form,
     Button,
@@ -25,7 +26,7 @@ export default class LoginPage extends React.Component {
     }
 
     componentDidMount() {
-        if (window.getJwtToken()) {
+        if (getJwtToken()) {
             this.navigateTo(Url.PERSONS_PAGE);
         }
     }
@@ -38,7 +39,7 @@ export default class LoginPage extends React.Component {
 
     onSuccess(response) {
         const { data } = response
-        window.storeToken(data.token);
+        storeToken(data.token);
         window.renderNavBar();
         this.navigateTo(Url.PERSONS_PAGE);
     }

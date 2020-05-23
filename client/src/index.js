@@ -9,11 +9,12 @@ import axios from "./axios/index"
 import $ from 'jquery';
 import Url from "./url";
 import { createBrowserHistory } from 'history';
+import {getJwtToken,clearStorage} from './utils/cache'
 
 $(document).ready(() => {
 
   const requestHandler = (config) => {
-      let token = window.getJwtToken();
+      let token = getJwtToken();
       if (token) {
           config.headers = {
               'User-Token': token
@@ -28,7 +29,7 @@ $(document).ready(() => {
 
   const errorHandler = (error) => {
       if (error.response.status === 401) {
-          window.clearStorage();
+          clearStorage();
           const history = createBrowserHistory();
           history.push(Url.LOGIN);
           window.loggedInUser = null;
@@ -43,26 +44,6 @@ $(document).ready(() => {
       response => responseHandler(response),
       error => errorHandler(error)
   );
-
-
-  window.getJwtToken = () => {window.localStorage.getItem('token')};
-
-  window.storeToken = (token) => {
-      window.localStorage.setItem('token', token);
-  };
-
-  window.clearStorage = () => {
-      window.localStorage.clear();
-      window.sessionStorage.clear();
-  };
-
-  window.setRefreshToken = (refreshToken) => window.localStorage.setItem('refreshToken', refreshToken);
-
-  window.getRefreshToken = () => window.localStorage.getItem('refreshToken');
-
-  window.setTokenExpiry = (tokenExpiresAt) => window.localStorage.setItem('tokenExpiresAt', tokenExpiresAt);
-
-  window.getTokenExpiry = () => window.localStorage.getItem('tokenExpiresAt');
 
   window.renderDashboard = () => {
       ReactDOM.render(
