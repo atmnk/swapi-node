@@ -27,6 +27,13 @@ $(document).ready(() => {
   };
 
   const errorHandler = (error) => {
+      if (error.response.status === 401) {
+          window.clearStorage();
+          const history = createBrowserHistory();
+          history.push(Url.LOGIN);
+          window.loggedInUser = null;
+          window.location.reload(true);
+      }
       return Promise.reject(error);
   };
 

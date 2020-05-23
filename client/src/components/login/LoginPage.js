@@ -38,7 +38,7 @@ export default class LoginPage extends React.Component {
 
     onSuccess(response) {
         const { data } = response
-        window.storeToken(token);
+        window.storeToken(data.token);
         window.renderNavBar();
         this.navigateTo(Url.PERSONS_PAGE);
     }
