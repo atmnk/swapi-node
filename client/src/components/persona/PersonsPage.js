@@ -36,7 +36,7 @@ export default class PersonsPage extends React.Component {
     render() {
         return (
             <div>
-                <div>List of all Persons</div>
+                <div id="personsPageTitle">List of all Persons</div>
                 <PersonaList personas={this.state.personas}/>
             </div>
             

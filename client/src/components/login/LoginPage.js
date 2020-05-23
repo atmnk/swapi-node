@@ -76,7 +76,7 @@ export default class LoginPage extends React.Component {
         this.navigateTo(Url.RESET_PASSWORD);
     }
 
-    renderError(key, className = 'text-danger') {
+    renderError(className = 'text-danger') {
         const containsError = this.state.errors && this.state.errors !== undefined;
         if (containsError) {
             const errorMessage = this.state.errors;
@@ -113,22 +113,21 @@ export default class LoginPage extends React.Component {
                                     <Card.Link href="/users">
                                             &nbsp;Sign up now</Card.Link>
                                     </Card.Subtitle>
-                                    <label className="login-error">
-                                    {this.renderError('message')}
+                                    <label id="loginError">
+                                        {this.renderError()}
                                     </label>
                                     
                                     
                                     <Form className="login-form">
-                                        <Form.Group controlId="formBasicEmail">
+                                        <Form.Group controlId="username">
                                             <Form.Control type="text" name='username' placeholder="Username" onChange={this.changeState} />
                                         </Form.Group>
-
-                                        <Form.Group controlId="formBasicPassword">
+                                        <Form.Group controlId="password">
                                             <Form.Control onKeyDown={this.onEnter} type="password" name='password' placeholder="Password" value={this.state.password} onChange={this.changeState} />
                                         </Form.Group>
-                                        <Button variant="primary" type="button" onClick={this.submit}>
+                                        <Button variant="primary" type="button" onClick={this.submit} controlId="loginButton">
                                             LOGIN
-                                    </Button>
+                                        </Button>
                                     </Form>
                                 </Card.Body>
                             </Card>
