@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd client && npm install && npm run build && npx sequelize db:migrate && npx sequelize db:seed:all"
+    "heroku-postbuild": "cd client && npm install && npm run build && cd .. && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "repository": {
     "type": "git",
