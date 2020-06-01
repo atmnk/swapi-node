@@ -1,4 +1,4 @@
-import getPersonas from './services/persona'
+const personaService = require('./services/persona')
 const jwt = require('jsonwebtoken');
 const accessTokenSecret = 'This is very secret access token';
 var appRouter = function (app) {
@@ -15,7 +15,7 @@ var appRouter = function (app) {
         }
     ];
     app.get(basePath+"/people", function(req, res) {
-      getPersonas(req,res)
+      personaService.getPersonas(req,res)
       // var people = require('../fixtures/people.json').map((person)=>{
       //   person.fields["id"]=person.pk
       //   return person.fields;
