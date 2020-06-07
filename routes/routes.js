@@ -15,24 +15,64 @@ var appRouter = function (app) {
         }
     ];
     app.get(basePath+"/people", function(req, res) {
-      personaService.getPersonas(req,res)
-      // var people = require('../fixtures/people.json').map((person)=>{
-      //   person.fields["id"]=person.pk
-      //   return person.fields;
-      // });
-      // res.status(200).send({"results":people});
+      personaService.getPersonas(req,res);
+    });
+    app.get(basePath+"/people/:id", function(req, res) {
+      personaService.getPersona(req.params.id,res);
+    });
+    const allowIf = (req,res,role,method)=>{
+      var header = req.header("Authorization")
+      var authorized = false;
+      var allowed = false;
+
+      if(header){
+        var decoded = jwt.verify(header,accessTokenSecret);
+        if(decoded){
+          authorized = true;
+          if(decoded.role==role){
+            allowed=true;
+            method();
+          }
+        }
+      }
+      if(!authorized){
+        res
+        .status(401)
+        .json({
+          error: 'UNAUTHORIZED'
+        });
+      } else if(!allowed){
+        res
+        .status(403)
+        .json({
+          error: 'INSUFFICIENT_RIGHTS'
+        });
+      }
+    }
+    app.post(basePath+"/people", function(req, res) {
+      allowIf(req,res,"admin",()=>{
+        var persona = (({ name,
+          gender,
+          skin_color,
+          hair_color,
+          eye_color,createdAt,updatedAt }) => ({ name,
+            gender,
+            skin_color,
+            hair_color,
+            eye_color,
+            createdAt:new Date(),
+            updatedAt: new Date()}))(req.body);
+        personaService.savePersona(persona,res);
+      })
     });
 
 
     app.post(basePath+'/login', (req, res) => {
-      // Read username and password from request body
       const { username, password } = req.body;
   
-      // Filter user from the users array by username and password
       const user = users.find(u => { return u.username === username && u.password === password });
   
       if (user) {
-          // Generate an access token
           const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret);
   
           res.json({
