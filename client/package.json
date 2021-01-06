@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "jquery": "^3.5.0",
     "node-sass": "^4.13.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "underscore": "^1.10.2",
     "bootstrap": "^4.4.1",
     "react": "^16.13.1",
