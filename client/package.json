@@ -10,7 +10,7 @@
     "jquery": "^3.5.0",
     "node-sass": "^4.13.1",
     "axios": "^0.21.1",
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "bootstrap": "^4.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
